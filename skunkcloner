@@ -1897,12 +1897,14 @@ my $dnum = 0;
                         getdotipstr( $newgateway) . " double\n";
         }
     }
+    executer( $cmd);
+    $cmd = '';
+    
     if ($changetovt) {
         my $bolocor = read_a_file( $f_boot_loader_conf);
         $$bolocor =~ s/^(kern\.vty=")[scvt]+(")$/$1vt$2/im;
         write_a_file( "/tmp/$newpoolname$f_boot_loader_conf", $bolocor);
     }
-    
     
     $cmd .= "zfs unmount $newpoolname/ROOT/default\n";
     $cmd .= "zpool export $newpoolname\n";
